@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.assignment_kot104_ph35419.ui.screens.CartScreen
 import com.example.assignment_kot104_ph35419.ui.screens.FavouriteScreen
 import com.example.assignment_kot104_ph35419.ui.screens.HomeScreen
