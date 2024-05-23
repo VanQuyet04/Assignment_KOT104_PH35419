@@ -69,6 +69,9 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    implementation ("androidx.compose.material:material-icons-extended:1.4.3") // Cập nhật phiên bản nếu cần thiết
+
     implementation("androidx.compose.material:material")
+    implementation ("androidx.navigation:navigation-compose:2.4.0") // Thay bằng phiên bản Navigation mới nhất
 
 }

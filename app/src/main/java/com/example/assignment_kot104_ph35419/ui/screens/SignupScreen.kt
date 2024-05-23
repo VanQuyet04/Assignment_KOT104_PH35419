@@ -1,5 +1,6 @@
 package com.example.assignment_kot104_ph35419.ui.screens
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,28 +12,49 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.assignment_kot104_ph35419.R
-import com.example.assignment_kot104_ph35419.ui.theme.Assignment_KOT104_PH35419Theme
 
-class Login : ComponentActivity() {
+class Signup : ComponentActivity() {
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Assignment_KOT104_PH35419Theme {
-                LoginScreen()
-            }
+            val navController = rememberNavController()
+            SignupScreen(navController)
+
         }
     }
 }
 
 @Composable
-fun LoginScreen() {
+fun SignupScreen(navController: NavController) {
+    var passwordVisible by remember { mutableStateOf(false) }
+    var repasswordVisible by remember { mutableStateOf(false) }
+
+    var name by remember {
+        mutableStateOf("")
+    }
+    var email by remember {
+        mutableStateOf("")
+    }
+    var password by remember {
+        mutableStateOf("")
+    }
+    var repassword by remember {
+        mutableStateOf("")
+    }
+
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -86,16 +108,16 @@ fun LoginScreen() {
             Spacer(modifier = Modifier.height(24.dp))
 
             OutlinedTextField(
-                value = "",
-                onValueChange = { },
+                value = name,
+                onValueChange = { name = it },
                 label = { Text("Name") },
                 modifier = Modifier.fillMaxWidth()
             )
 
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
-                value = "",
-                onValueChange = { },
+                value = email,
+                onValueChange = { email = it },
                 label = { Text("Email") },
                 modifier = Modifier.fillMaxWidth()
             )
@@ -103,15 +125,22 @@ fun LoginScreen() {
             Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedTextField(
-                value = "",
-                onValueChange = { },
+                value = password,
+                onValueChange = { password = it },
                 label = { Text("Password") },
+                visualTransformation = if (!passwordVisible) PasswordVisualTransformation() else  VisualTransformation.None,
                 trailingIcon = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.eye2),
-                        contentDescription = "Visibility",
-                        modifier = Modifier.size(24.dp)
-                    )
+                    val image: Painter = if (passwordVisible) {
+                        painterResource(id = R.drawable.visibility) // Thay thế bằng icon của bạn
+                    } else {
+                        painterResource(id = R.drawable.visibilityoff) // Thay thế bằng icon của bạn
+                    }
+                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                        Icon(painter = image, contentDescription = null,
+                            modifier = Modifier.size(24.dp)
+                        )
+
+                    }
                 },
                 modifier = Modifier.fillMaxWidth()
             )
@@ -119,15 +148,22 @@ fun LoginScreen() {
 
             Spacer(modifier = Modifier.height(8.dp))
             OutlinedTextField(
-                value = "",
-                onValueChange = { },
+                value = repassword,
+                onValueChange = { repassword = it },
                 label = { Text("Comfirm Password") },
+                visualTransformation = if (!repasswordVisible) PasswordVisualTransformation() else  VisualTransformation.None,
                 trailingIcon = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.eye2),
-                        contentDescription = "Visibility",
-                        modifier = Modifier.size(24.dp)
-                    )
+                    val image: Painter = if (repasswordVisible) {
+                        painterResource(id = R.drawable.visibility) // Thay thế bằng icon của bạn
+                    } else {
+                        painterResource(id = R.drawable.visibilityoff) // Thay thế bằng icon của bạn
+                    }
+                    IconButton(onClick = { repasswordVisible = !repasswordVisible }) {
+                        Icon(painter = image, contentDescription = null,
+                            modifier = Modifier.size(24.dp)
+                        )
+
+                    }
                 },
                 modifier = Modifier.fillMaxWidth()
             )
@@ -183,12 +219,7 @@ fun LoginScreen() {
 
         }
     }
+
+
 }
 
-@Preview(showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    Assignment_KOT104_PH35419Theme {
-        LoginScreen()
-    }
-}
