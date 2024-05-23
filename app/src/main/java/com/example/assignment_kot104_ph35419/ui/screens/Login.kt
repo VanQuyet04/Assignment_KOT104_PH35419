@@ -17,6 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.assignment_kot104_ph35419.R
 import com.example.assignment_kot104_ph35419.ui.theme.Assignment_KOT104_PH35419Theme
 
 class Login : ComponentActivity() {
