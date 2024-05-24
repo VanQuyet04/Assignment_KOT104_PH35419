@@ -54,7 +54,7 @@ fun ProfileScreen(navController: NavHostController) {
                     ){}
                     Spacer(modifier = Modifier.height(16.dp))
                     ProfileHeader()
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(40.dp))
                     UtilityList()
                 }
             }
@@ -123,13 +123,15 @@ fun UtilityItem(title: String, subtitle: String, onClick: () -> Unit) {
             .padding(vertical = 5.dp) // Adds spacing between items
             .clickable { onClick() },
         shape = RoundedCornerShape(8.dp),
-        elevation = CardDefaults.cardElevation(4.dp) // Adds elevation to the card
+        elevation = CardDefaults.cardElevation(4.dp) ,
+        colors = CardDefaults.cardColors(containerColor = Color.White) // Change this to desired color
+
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp) // Adds padding inside the card
+                .padding(16.dp).padding(10.dp) // Adds padding inside the card
         ) {
             Column(
                 modifier = Modifier.weight(1f)

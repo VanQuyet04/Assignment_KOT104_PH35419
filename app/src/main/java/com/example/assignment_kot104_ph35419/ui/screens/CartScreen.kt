@@ -5,6 +5,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -13,6 +14,7 @@ import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -20,7 +22,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-
 import androidx.navigation.compose.rememberNavController
 import com.example.assignment_kot104_ph35419.R
 
@@ -31,17 +32,15 @@ data class CartItem(
     var quantity: Int
 )
 
-class MainActivity : ComponentActivity() {
+class CartActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
             CartScreen(navController)
-
         }
     }
 }
-
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -75,10 +74,12 @@ fun CartScreen(navController: NavHostController) {
                         leftIconId = R.drawable.back,
                         rightIconId = null,
                         onLeftClick = { navController.popBackStack() },
-                        onRightClick = {  }){}
+                        onRightClick = { }
+                    ) {}
 
                     items.forEach { item ->
-                        CartItemRow(item, onRemove = { items.remove(item) })
+                        CartItemCard(item, onRemove = { items.remove(item) })
+                        Spacer(modifier = Modifier.height(10.dp))
                     }
                 }
                 Column(
@@ -104,41 +105,59 @@ fun CartScreen(navController: NavHostController) {
     )
 }
 
-
 @Composable
-fun CartItemRow(item: CartItem, onRemove: () -> Unit) {
-    var quantity by remember {
-        mutableStateOf(item.quantity)
-    }
-    Row(
+fun CartItemCard(item: CartItem, onRemove: () -> Unit) {
+    Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically
+            .padding(vertical = 5.dp),
+        shape = RoundedCornerShape(8.dp),
+        elevation = 4.dp, // Adds elevation to the card
+        backgroundColor = Color.White
     ) {
-        Image(
-            painter = painterResource(id = item.image),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.size(64.dp)
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Column(modifier = Modifier.weight(1f)) {
-            Text(item.name, fontWeight = FontWeight.Bold)
-            Text("$${item.price}", color = Color.Gray)
-        }
-        Spacer(modifier = Modifier.width(8.dp))
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            IconButton(onClick = { if (quantity > 1) quantity-- }) {
-                Icon(Icons.Default.Remove, contentDescription = "Decrease quantity")
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(
+                    painter = painterResource(id = item.image),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(64.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(item.name, fontWeight = FontWeight.Bold)
+                    Text("$${item.price}", color = Color.Gray)
+                    Spacer(modifier = Modifier.width(10.dp))
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(end = 5.dp)
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            var quantity by remember { mutableStateOf(item.quantity) }
+                            IconButton(onClick = { if (quantity > 1) quantity-- }) {
+                                Icon(Icons.Default.Remove, contentDescription = "Decrease quantity")
+                            }
+                            Text("$quantity", fontSize = 18.sp)
+                            IconButton(onClick = { quantity++ }) {
+                                Icon(Icons.Default.Add, contentDescription  = "Increase quantity")
+                            }
+                        }
+                    }
+                }
+                IconButton(onClick = onRemove) {
+                    Icon(Icons.Default.Delete, contentDescription = "Remove item")
+                }
             }
-            Text("${item.quantity}", fontSize = 18.sp)
-            IconButton(onClick = { quantity++ }) {
-                Icon(Icons.Default.Add, contentDescription = "Increase quantity")
-            }
-        }
-        IconButton(onClick = onRemove) {
-            Icon(Icons.Default.Delete, contentDescription = "Remove item")
+            Spacer(modifier = Modifier.height(8.dp))
+
         }
     }
 }
