@@ -23,13 +23,5 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun SplashScreen() {
 
-}
 
-@Preview(showBackground = true)
-@Composable
-fun BoardingScreenPreview() {
-
-}

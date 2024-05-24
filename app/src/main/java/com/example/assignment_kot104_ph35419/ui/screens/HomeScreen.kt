@@ -1,5 +1,6 @@
 package com.example.assignment_kot104_ph35419.ui.screens
 
+import CustomTopBar
 import android.annotation.SuppressLint
 
 import androidx.compose.foundation.Image
@@ -8,7 +9,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
-
 
 
 import androidx.compose.material3.*
@@ -22,15 +22,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.assignment_kot104_ph35419.R
 import com.example.assignment_kot104_ph35419.navigation.bottom_navhost
@@ -39,11 +35,13 @@ import com.example.assignment_kot104_ph35419.navigation.bottom_navhost
 @Composable
 fun Home() {
 
-    val navController = rememberNavController()
+    val bottomnavController = rememberNavController()
+
+
     Scaffold(
-        bottomBar = { BottomNavigationBar(navController) }
+        bottomBar = { BottomNavigationBar(bottomnavController) }
     ) {
-        bottom_navhost(navController)
+        bottom_navhost(bottomnavController)
     }
 }
 
@@ -51,6 +49,7 @@ fun Home() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(nav: NavController) {
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -63,7 +62,17 @@ fun HomeScreen(nav: NavController) {
                 .background(Color.White)
                 .padding(16.dp)
         ) {
-            TopBar(nav)
+            CustomTopBar(
+                title = "Make home",
+                subtitle ="Beautiful",
+                leftIconId =R.drawable.timkiem,
+                rightIconId =R.drawable.giohang,
+                onLeftClick = {  },
+                onRightClick = {
+                    nav.navigate("cart")
+                }
+
+            ) {}
             Spacer(modifier = Modifier.height(16.dp))
             CategoryRow()
             Spacer(modifier = Modifier.height(16.dp))
@@ -73,50 +82,6 @@ fun HomeScreen(nav: NavController) {
 
 }
 
-@Composable
-fun TopBar(nav: NavController) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        IconButton(onClick = { }) {
-            Icon(
-                painter = painterResource(id = R.drawable.timkiem),
-                contentDescription = "Search",
-                modifier = Modifier.size(24.dp)
-            )
-        }
-        Spacer(modifier = Modifier.weight(1f))
-        Column {
-            Text(
-                text = "   Make home",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Gray,
-                textAlign = TextAlign.Center,
-            )
-            Text(
-                text = " BEAUTIFUL",
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black,
-                textAlign = TextAlign.Center,
-            )
-        }
-
-        Spacer(modifier = Modifier.weight(1f))
-        IconButton(onClick = {
-            nav.navigate("cart")
-        }) {
-            Icon(
-                painter = painterResource(id = R.drawable.giohang),
-                contentDescription = "Cart",
-                modifier = Modifier.size(24.dp)
-            )
-        }
-    }
-}
 
 @Composable
 fun CategoryRow() {
@@ -162,19 +127,21 @@ fun CategoryItem(iconRes: Int, label: String) {
 fun ProductGrid(
 ) {
     val products = listOf(
-        Product(R.drawable.img_lamp, "Black Simple Lamp", "$ 12.00"),
-        Product(R.drawable.img_stand, "Minimal Stand", "$ 25.00"),
-        Product(R.drawable.img_chair, "Coffee Chair", "$ 20.00"),
-        Product(R.drawable.img_desk, "Simple Desk", "$ 50.00"),
-        Product(R.drawable.img_desk, "Simple Desk", "$ 50.00"),
-        Product(R.drawable.img_desk, "Simple Desk", "$ 50.00"),
-        Product(R.drawable.img_desk, "Simple Desk", "$ 50.00"),
-        Product(R.drawable.img_desk, "Simple Desk", "$ 50.00"),
+        Product(R.drawable.img_lamp, "Black Simple Lamp", "$ 12.00", 50, "Ngon bá cháy"),
+        Product(R.drawable.img_stand, "Minimal Stand", "$ 25.00", 53, "Ngon bá khét"),
+        Product(R.drawable.img_chair, "Coffee Chair", "$ 20.00", 55, "Ngon bá bá"),
+        Product(R.drawable.img_desk, "Simple Desk", "$ 50.00", 52, "Ngon bá khí"),
+        Product(R.drawable.img_stand, "Normal Desk", "$ 40.00", 59, "Ngon bá đạo"),
+        Product(R.drawable.img_desk, "Hard Desk", "$ 60.00", 56, "Ngon bá bú"),
+        Product(R.drawable.img_lamp, "Soft Desk", "$ 70.00", 54, "Ngon bá chó"),
+        Product(R.drawable.img_chair, "Office Desk", "$ 80.00", 55, "Ngon bá chém"),
     )
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = Modifier.fillMaxSize().padding(0.dp,0.dp,0.dp,60.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(0.dp, 0.dp, 0.dp, 60.dp),
         contentPadding = PaddingValues(8.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
@@ -312,4 +279,10 @@ fun BottomNavigationBar(nav: NavController) {
     }
 }
 
-data class Product(val imageRes: Int, val name: String, val price: String)
+data class Product(
+    val imageRes: Int,
+    val name: String,
+    val price: String,
+    val quantity: Int,
+    val description: String
+)

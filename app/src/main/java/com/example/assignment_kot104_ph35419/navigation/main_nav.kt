@@ -1,5 +1,6 @@
 package com.example.assignment_kot104_ph35419.navigation
 
+import CartScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -28,8 +29,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.assignment_kot104_ph35419.R
-import com.example.assignment_kot104_ph35419.ui.screens.CartScreen
 import com.example.assignment_kot104_ph35419.ui.screens.Home
+import com.example.assignment_kot104_ph35419.ui.screens.HomeScreen
 import com.example.assignment_kot104_ph35419.ui.screens.LoginScreen
 import com.example.assignment_kot104_ph35419.ui.screens.SignupScreen
 
@@ -40,9 +41,10 @@ fun main_navhost(navController: NavHostController) {
         composable("login") { LoginScreen(navController) }
         composable("signup") { SignupScreen(navController) }
         composable("splash") { SplashScreen(navController) }
-        composable("cart") { CartScreen() }
+
 
         composable("main") { Home() }
+        // các màn ngoài chung nav với main(chứa các màn bottom nav)
 
     }
 }
