@@ -31,7 +31,6 @@ import com.example.assignment_kot104_ph35419.R
 @Composable
 fun NotificationScreen(navController: NavHostController) {
 
-
     Scaffold(
         modifier = Modifier
             .fillMaxSize()

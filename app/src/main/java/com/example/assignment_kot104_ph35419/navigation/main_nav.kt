@@ -42,7 +42,6 @@ fun main_navhost(navController: NavHostController) {
         composable("signup") { SignupScreen(navController) }
         composable("splash") { SplashScreen(navController) }
 
-
         composable("main") { Home() }
         // các màn ngoài chung nav với main(chứa các màn bottom nav)
 
