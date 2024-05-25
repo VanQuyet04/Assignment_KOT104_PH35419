@@ -1,6 +1,7 @@
 package com.example.assignment_kot104_ph35419.navigation
 
 import CartScreen
+import ProductDetailScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -38,9 +39,10 @@ import com.example.assignment_kot104_ph35419.ui.screens.SignupScreen
 fun main_navhost(navController: NavHostController) {
 
     NavHost(navController = navController, startDestination = "splash") {
+        composable("splash") { SplashScreen(navController) }
         composable("login") { LoginScreen(navController) }
         composable("signup") { SignupScreen(navController) }
-        composable("splash") { SplashScreen(navController) }
+        composable("detail") { ProductDetailScreen(navController = navController) }
 
         composable("main") { Home() }
         // các màn ngoài chung nav với main(chứa các màn bottom nav)
@@ -49,7 +51,7 @@ fun main_navhost(navController: NavHostController) {
 }
 
 @Composable
-fun SplashScreen(nav:NavHostController) {
+fun SplashScreen(nav: NavHostController) {
 
     Box(
         modifier = Modifier
@@ -106,7 +108,7 @@ fun SplashScreen(nav:NavHostController) {
             Spacer(modifier = Modifier.height(170.dp))
             Button(
                 onClick = {
-                          nav.navigate("login")
+                    nav.navigate("login")
                 },
                 shape = MaterialTheme.shapes.medium,
                 colors = ButtonDefaults.buttonColors(
