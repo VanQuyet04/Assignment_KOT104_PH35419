@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -100,8 +101,9 @@ fun CartScreen(navController: NavHostController) {
                             modifier = Modifier.padding(bottom = 8.dp)
                         )
                         Button(
-                            onClick = { /* Chuyển đến màn hình xác nhận */ },
+                            onClick = { },
                             modifier = Modifier.fillMaxWidth(),
+                            shape = MaterialTheme.shapes.medium,
                             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black, contentColor = Color.White) // Điều chỉnh màu chữ ở đây
                         ) {
                             Text("Check out")

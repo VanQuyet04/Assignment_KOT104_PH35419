@@ -189,6 +189,7 @@ fun ProductDetailScreen(navController: NavController, productId: String) {
                 Button(
                     onClick = { },
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                    shape = MaterialTheme.shapes.medium,
                     modifier = Modifier.weight(2f).height(60.dp)
 
                 ) {

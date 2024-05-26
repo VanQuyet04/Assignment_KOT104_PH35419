@@ -50,19 +50,17 @@ fun LoginScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White),
-        contentAlignment = Alignment.Center
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(top = 97.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
         ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 8.dp),
+                    .padding(bottom = 20.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Divider(
@@ -151,6 +149,8 @@ fun LoginScreen(navController: NavController) {
                 onClick = {
                     navController.navigate("main")
                 },
+                shape = MaterialTheme.shapes.medium,
+
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Black,
                     contentColor = Color.White

@@ -42,9 +42,6 @@ fun bottom_graph(navController: NavHostController) {
         composable("favourite") { FavouriteScreen(navController) }
         composable("profile") { ProfileScreen(navController) }
 
-        composable("cart") { CartScreen(navController) }
-
-
     }
 }
 
@@ -99,7 +96,7 @@ fun BottomNavigationBar(navController: NavController) {
                     },
                     colors = NavigationBarItemDefaults.colors(
                         selectedIconColor = Color.Black,
-                        unselectedIconColor = Color.Gray,
+                        unselectedIconColor = Color.LightGray,
                         indicatorColor = Color.White
                     ),
                     alwaysShowLabel = false,

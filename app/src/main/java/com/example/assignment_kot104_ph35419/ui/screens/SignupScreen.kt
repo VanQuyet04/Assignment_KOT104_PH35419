@@ -58,7 +58,8 @@ fun SignupScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White),
+            .background(Color.White)
+        ,
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -183,6 +184,7 @@ fun SignupScreen(navController: NavController) {
                     containerColor = Color.Black,
                     contentColor = Color.White
                 ),
+                shape = MaterialTheme.shapes.medium,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)

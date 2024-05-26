@@ -45,7 +45,7 @@ fun HomeScreen(nav: NavController) {
                 title = "Make home",
                 subtitle = "Beautiful",
                 leftIconId = R.drawable.timkiem,
-                rightIconId = R.drawable.giohang,
+                rightIconId = R.drawable.cart,
                 onLeftClick = { },
                 onRightClick = {
                     nav.navigate("cart")

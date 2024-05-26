@@ -35,6 +35,13 @@ fun FavouriteScreen(navController: NavHostController) {
             Product(2, R.drawable.img_stand, "Minimal Stand", "$ 25.00", 53, "Ngon bá khét"),
             Product(3, R.drawable.img_chair, "Coffee Chair", "$ 20.00", 55, "Ngon bá bá"),
             Product(4, R.drawable.img_desk, "Simple Desk", "$ 50.00", 52, "Ngon bá khí"),
+            Product(4, R.drawable.img_desk, "Simple Desk", "$ 50.00", 52, "Ngon bá khí"),
+            Product(4, R.drawable.img_desk, "Simple Desk", "$ 50.00", 52, "Ngon bá khí"),
+            Product(4, R.drawable.img_desk, "Simple Desk", "$ 50.00", 52, "Ngon bá khí"),
+            Product(4, R.drawable.img_desk, "Simple Desk", "$ 50.00", 52, "Ngon bá khí"),
+            Product(4, R.drawable.img_desk, "Simple Desk", "$ 50.00", 52, "Ngon bá khí"),
+            Product(4, R.drawable.img_desk, "Simple Desk", "$ 50.00", 52, "Ngon bá khí"),
+
             )
     }
 
@@ -52,17 +59,26 @@ fun FavouriteScreen(navController: NavHostController) {
                     title = "My favourite",
                     subtitle = null,
                     leftIconId = R.drawable.back,
-                    rightIconId = R.drawable.giohang,
+                    rightIconId = R.drawable.cart,
                     onLeftClick = { navController.popBackStack() },
                     onRightClick = { navController.navigate("cart") }
                 ) {}
                 Spacer(modifier = Modifier.height(16.dp))
-                ProductList(productList)
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                ) {
+                    ProductList(productList)
+                    Spacer(modifier = Modifier.height(10.dp)) // Spacer giữa danh sách và nút
+                }
+
                 AddAllToCartButton(
                     onClick = { /* Xử lý thêm tất cả vào giỏ hàng */ },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 16.dp)
+                        .padding(10.dp)
                 )
             }
         }
@@ -71,9 +87,8 @@ fun FavouriteScreen(navController: NavHostController) {
 
 @Composable
 fun ProductList(products: List<Product>) {
-    LazyColumn (
-        modifier = Modifier.padding(bottom = 10.dp)
-    ){
+    LazyColumn(
+    ) {
         items(products.size) { index ->
             val product = products[index]
             ProductItem(
@@ -130,13 +145,17 @@ fun ProductItem(product: Product, onAddToCart: () -> Unit, onRemove: () -> Unit)
 
 @Composable
 fun AddAllToCartButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+
     Button(
         onClick = onClick,
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(top = 10.dp, bottom = 60.dp),
+        shape = MaterialTheme.shapes.medium,
         colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
     ) {
-        Text(text = "Add all to my cart", color = Color.White)
+        Text(text = "Add all to my cart", color = Color.White, modifier = Modifier.padding(8.dp))
     }
+
 }
+
