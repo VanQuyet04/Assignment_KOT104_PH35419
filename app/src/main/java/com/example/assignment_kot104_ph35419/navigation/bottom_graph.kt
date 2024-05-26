@@ -67,10 +67,10 @@ fun BottomNavigationBar(nav: NavController) {
                             saveState = true
                         }
 
-// Điều hướng đến 1 màn hình duy nhất và k tạo thêm bản sao
+                        // Điều hướng đến 1 màn hình duy nhất và k tạo thêm bản sao
                         launchSingleTop = true
 
-// Khôi phục trạng thái đã lưu
+                        // Khôi phục trạng thái đã lưu
                         restoreState = true
                     }
                 },
