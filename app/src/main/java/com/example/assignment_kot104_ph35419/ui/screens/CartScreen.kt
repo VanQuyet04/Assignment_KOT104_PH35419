@@ -6,7 +6,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -171,36 +170,5 @@ fun CartItemCard(item: CartItem, onRemove: () -> Unit) {
     }
 }
 
-@Composable
-fun CustomTopBar(
-    title: String,
-    subtitle: String?,
-    leftIconId: Int,
-    rightIconId: Int?,
-    onLeftClick: () -> Unit,
-    onRightClick: () -> Unit
-) {
-    TopAppBar(
-        title = { Text(title) },
-        navigationIcon = {
-            IconButton(onClick = onLeftClick) {
-                Icon(painterResource(id = leftIconId), contentDescription = "Back")
-            }
-        },
-        actions = {
-            rightIconId?.let {
-                IconButton(onClick = onRightClick) {
-                    Icon(painterResource(id = rightIconId), contentDescription = "Action")
-                }
-            }
-        },
-        backgroundColor = MaterialTheme.colors.primary
-    )
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
 
 
