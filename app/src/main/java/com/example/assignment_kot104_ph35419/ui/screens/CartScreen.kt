@@ -5,11 +5,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -77,27 +79,34 @@ fun CartScreen(navController: NavHostController) {
                         onRightClick = { }
                     ) {}
 
-                    items.forEach { item ->
-                        CartItemCard(item, onRemove = { items.remove(item) })
-                        Spacer(modifier = Modifier.height(10.dp))
+                    LazyColumn {
+                        items(items.size) { index ->
+                            val item = items[index]
+                            CartItemCard(item, onRemove = { items.remove(item) })
+                            Spacer(modifier = Modifier.height(10.dp))
+                        }
                     }
-                }
-                Column(
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .padding(16.dp)
-                ) {
-                    Text(
-                        text = "Total: $${"%.2f".format(total)}",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Button(
-                        onClick = { /* Chuyển đến màn hình xác nhận */ },
+
+                    // Khoảng trống giữa danh sách và cột giá + nút
+                    Spacer(modifier = Modifier.height(60.dp))
+
+                    // Cột giá và nút checkout
+                    Column(
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text("Check out")
+                        Text(
+                            text = "Total: $${"%.2f".format(total)}",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
+                        Button(
+                            onClick = { /* Chuyển đến màn hình xác nhận */ },
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black, contentColor = Color.White) // Điều chỉnh màu chữ ở đây
+                        ) {
+                            Text("Check out")
+                        }
                     }
                 }
             }
@@ -161,3 +170,37 @@ fun CartItemCard(item: CartItem, onRemove: () -> Unit) {
         }
     }
 }
+
+@Composable
+fun CustomTopBar(
+    title: String,
+    subtitle: String?,
+    leftIconId: Int,
+    rightIconId: Int?,
+    onLeftClick: () -> Unit,
+    onRightClick: () -> Unit
+) {
+    TopAppBar(
+        title = { Text(title) },
+        navigationIcon = {
+            IconButton(onClick = onLeftClick) {
+                Icon(painterResource(id = leftIconId), contentDescription = "Back")
+            }
+        },
+        actions = {
+            rightIconId?.let {
+                IconButton(onClick = onRightClick) {
+                    Icon(painterResource(id = rightIconId), contentDescription = "Action")
+                }
+            }
+        },
+        backgroundColor = MaterialTheme.colors.primary
+    )
+}
+
+@Composable
+fun Greeting(name: String) {
+    Text(text = "Hello $name!")
+}
+
+

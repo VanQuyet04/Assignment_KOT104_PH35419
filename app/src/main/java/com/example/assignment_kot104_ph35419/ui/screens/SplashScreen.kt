@@ -1,7 +1,5 @@
-package com.example.assignment_kot104_ph35419.navigation
+package com.example.assignment_kot104_ph35419.ui.screens
 
-import CartScreen
-import ProductDetailScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -27,28 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import com.example.assignment_kot104_ph35419.R
-import com.example.assignment_kot104_ph35419.ui.screens.Home
-import com.example.assignment_kot104_ph35419.ui.screens.HomeScreen
-import com.example.assignment_kot104_ph35419.ui.screens.LoginScreen
-import com.example.assignment_kot104_ph35419.ui.screens.SignupScreen
-
-@Composable
-fun main_navhost(navController: NavHostController) {
-
-    NavHost(navController = navController, startDestination = "splash") {
-        composable("splash") { SplashScreen(navController) }
-        composable("login") { LoginScreen(navController) }
-        composable("signup") { SignupScreen(navController) }
-        composable("detail") { ProductDetailScreen(navController = navController) }
-
-        composable("main") { Home() }
-        // các màn ngoài chung nav với main(chứa các màn bottom nav)
-
-    }
-}
 
 @Composable
 fun SplashScreen(nav: NavHostController) {

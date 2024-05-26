@@ -1,7 +1,6 @@
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -13,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -25,7 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.assignment_kot104_ph35419.R
 
 @Composable
-fun ProductDetailScreen(navController: NavController) {
+fun ProductDetailScreen(navController: NavController, productId: String) {
     val scrollState = rememberScrollState()
     val quantity = remember { mutableStateOf(1) }
 
@@ -137,6 +135,7 @@ fun ProductDetailScreen(navController: NavController) {
                         contentDescription = "Rating",
                         tint = Color.Yellow
                     )
+
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = "4.5",
@@ -160,33 +159,43 @@ fun ProductDetailScreen(navController: NavController) {
                 Spacer(modifier = Modifier.height(16.dp))
             }
         }
+        Spacer(modifier = Modifier.height(36.dp))
 
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.White)
-                .padding(16.dp)
-                .align(Alignment.BottomCenter),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            IconButton(onClick = { },
-                modifier = Modifier.weight(1f).height(60.dp)
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_favourite),
-                    contentDescription = "Bookmark",
-                    tint = Color.Black
-                )
-            }
 
-            Button(
-                onClick = { },
-                colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
-                modifier = Modifier.weight(2f).height(60.dp)
-
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White)
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "Add to cart", color = Color.White)
+                IconButton(
+                    onClick = { },
+                    modifier = Modifier.weight(1f).height(60.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_favourite),
+                        contentDescription = "Bookmark",
+                        tint = Color.Black
+                    )
+                }
+
+                Button(
+                    onClick = { },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                    modifier = Modifier.weight(2f).height(60.dp)
+
+                ) {
+                    Text(text = "Add to cart", color = Color.White)
+                }
             }
         }
     }
@@ -204,10 +213,4 @@ fun CircularButton(color: Color, onClick: () -> Unit) {
         shape = CircleShape,
         colors = ButtonDefaults.buttonColors(containerColor = color)
     ) {}
-}
-@Preview(showBackground = true)
-@Composable
-fun ProductDetailScreenPreview() {
-    val navController = rememberNavController()
-    ProductDetailScreen(navController)
 }

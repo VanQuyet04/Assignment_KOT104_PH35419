@@ -31,46 +31,38 @@ import com.example.assignment_kot104_ph35419.R
 fun FavouriteScreen(navController: NavHostController) {
     val productList = remember {
         mutableStateListOf(
-            Product(R.drawable.img_lamp, "Black Simple Lamp", "$ 12.00", 50, "Ngon bá cháy"),
-            Product(R.drawable.img_stand, "Minimal Stand", "$ 25.00", 53, "Ngon bá khét"),
-            Product(R.drawable.img_chair, "Coffee Chair", "$ 20.00", 55, "Ngon bá bá"),
-            Product(R.drawable.img_desk, "Simple Desk", "$ 50.00", 52, "Ngon bá khí"),
-            Product(R.drawable.img_stand, "Normal Desk", "$ 40.00", 59, "Ngon bá đạo"),
-            Product(R.drawable.img_desk, "Hard Desk", "$ 60.00", 56, "Ngon bá bú"),
-            Product(R.drawable.img_lamp, "Soft Desk", "$ 70.00", 54, "Ngon bá chó"),
-            Product(R.drawable.img_chair, "Office Desk", "$ 80.00", 55, "Ngon bá chém")
-        )
+            Product(1, R.drawable.img_lamp, "Black Simple Lamp", "$ 12.00", 50, "Ngon bá cháy"),
+            Product(2, R.drawable.img_stand, "Minimal Stand", "$ 25.00", 53, "Ngon bá khét"),
+            Product(3, R.drawable.img_chair, "Coffee Chair", "$ 20.00", 55, "Ngon bá bá"),
+            Product(4, R.drawable.img_desk, "Simple Desk", "$ 50.00", 52, "Ngon bá khí"),
+            )
     }
 
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White),
-
         content = {
-            Box(
-                modifier = Modifier.fillMaxSize()
-
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp)
-                ) {
-                    CustomTopBar(
-                        title = "My favourite",
-                        subtitle = null,
-                        leftIconId = R.drawable.back,
-                        rightIconId = R.drawable.giohang,
-                        onLeftClick = { navController.popBackStack() },
-                        onRightClick = { navController.navigate("cart") }
-                    ) {}
-                    Spacer(modifier = Modifier.height(16.dp))
-                    ProductList(productList)
-                }
+                CustomTopBar(
+                    title = "My favourite",
+                    subtitle = null,
+                    leftIconId = R.drawable.back,
+                    rightIconId = R.drawable.giohang,
+                    onLeftClick = { navController.popBackStack() },
+                    onRightClick = { navController.navigate("cart") }
+                ) {}
+                Spacer(modifier = Modifier.height(16.dp))
+                ProductList(productList)
                 AddAllToCartButton(
-                    onClick = { /* Handle add all to cart */ },
-                    modifier = Modifier.align(Alignment.BottomCenter)
+                    onClick = { /* Xử lý thêm tất cả vào giỏ hàng */ },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp)
                 )
             }
         }
@@ -79,7 +71,9 @@ fun FavouriteScreen(navController: NavHostController) {
 
 @Composable
 fun ProductList(products: List<Product>) {
-    LazyColumn {
+    LazyColumn (
+        modifier = Modifier.padding(bottom = 10.dp)
+    ){
         items(products.size) { index ->
             val product = products[index]
             ProductItem(
@@ -146,4 +140,3 @@ fun AddAllToCartButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
         Text(text = "Add all to my cart", color = Color.White)
     }
 }
-

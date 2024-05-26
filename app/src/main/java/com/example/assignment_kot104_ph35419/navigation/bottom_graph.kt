@@ -1,6 +1,5 @@
 package com.example.assignment_kot104_ph35419.navigation
 
-import CartScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -11,7 +10,7 @@ import com.example.assignment_kot104_ph35419.ui.screens.NotificationScreen
 import com.example.assignment_kot104_ph35419.ui.screens.ProfileScreen
 
 @Composable
-fun bottom_navhost(navController: NavHostController) {
+fun bottom_graph(navController: NavHostController) {
 
     NavHost(navController = navController, startDestination = "home") {
         composable("home") { HomeScreen(navController) }
@@ -19,9 +18,7 @@ fun bottom_navhost(navController: NavHostController) {
         composable("favourite") { FavouriteScreen(navController) }
         composable("profile") { ProfileScreen(navController) }
 
-        composable("cart") { CartScreen(navController) }
-
-        // màn home chung navCtrl với các màn bottom nav
+//        4 composable ở trên là của bottom navigation
 
     }
 }

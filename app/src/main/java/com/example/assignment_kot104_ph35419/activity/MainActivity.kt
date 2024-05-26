@@ -3,14 +3,9 @@ package com.example.assignment_kot104_ph35419.activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-
-import androidx.compose.runtime.Composable
-
-import androidx.compose.ui.tooling.preview.Preview
-
 import androidx.navigation.compose.rememberNavController
+import com.example.assignment_kot104_ph35419.navigation.main_graph
 
-import com.example.assignment_kot104_ph35419.navigation.main_navhost
 
 
 class MainActivity : ComponentActivity() {
@@ -18,7 +13,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            main_navhost(navController = navController)
+            main_graph(navController = navController)
         }
     }
 }

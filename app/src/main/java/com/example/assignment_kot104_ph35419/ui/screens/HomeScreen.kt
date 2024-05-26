@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -27,24 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.assignment_kot104_ph35419.R
-import com.example.assignment_kot104_ph35419.navigation.bottom_navhost
-
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@Composable
-fun Home() {
-
-    val bottomnavController = rememberNavController()
-
-
-    Scaffold(
-        bottomBar = { BottomNavigationBar(bottomnavController) }
-    ) {
-        bottom_navhost(bottomnavController)
-    }
-}
-
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -64,10 +48,10 @@ fun HomeScreen(nav: NavController) {
         ) {
             CustomTopBar(
                 title = "Make home",
-                subtitle ="Beautiful",
-                leftIconId =R.drawable.timkiem,
-                rightIconId =R.drawable.giohang,
-                onLeftClick = {  },
+                subtitle = "Beautiful",
+                leftIconId = R.drawable.timkiem,
+                rightIconId = R.drawable.giohang,
+                onLeftClick = { },
                 onRightClick = {
                     nav.navigate("cart")
                 }
@@ -76,7 +60,7 @@ fun HomeScreen(nav: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
             CategoryRow()
             Spacer(modifier = Modifier.height(16.dp))
-            ProductGrid()
+            ProductGrid(nav)
         }
     }
 
@@ -125,16 +109,18 @@ fun CategoryItem(iconRes: Int, label: String) {
 
 @Composable
 fun ProductGrid(
+    navController: NavController
+
 ) {
     val products = listOf(
-        Product(R.drawable.img_lamp, "Black Simple Lamp", "$ 12.00", 50, "Ngon bá cháy"),
-        Product(R.drawable.img_stand, "Minimal Stand", "$ 25.00", 53, "Ngon bá khét"),
-        Product(R.drawable.img_chair, "Coffee Chair", "$ 20.00", 55, "Ngon bá bá"),
-        Product(R.drawable.img_desk, "Simple Desk", "$ 50.00", 52, "Ngon bá khí"),
-        Product(R.drawable.img_stand, "Normal Desk", "$ 40.00", 59, "Ngon bá đạo"),
-        Product(R.drawable.img_desk, "Hard Desk", "$ 60.00", 56, "Ngon bá bú"),
-        Product(R.drawable.img_lamp, "Soft Desk", "$ 70.00", 54, "Ngon bá chó"),
-        Product(R.drawable.img_chair, "Office Desk", "$ 80.00", 55, "Ngon bá chém"),
+        Product(1,R.drawable.img_lamp, "Black Simple Lamp", "$ 12.00", 50, "Ngon bá cháy"),
+        Product(2,R.drawable.img_stand, "Minimal Stand", "$ 25.00", 53, "Ngon bá khét"),
+        Product(3,R.drawable.img_chair, "Coffee Chair", "$ 20.00", 55, "Ngon bá bá"),
+        Product(4,R.drawable.img_desk, "Simple Desk", "$ 50.00", 52, "Ngon bá khí"),
+        Product(5,R.drawable.img_stand, "Normal Desk", "$ 40.00", 59, "Ngon bá đạo"),
+        Product(6,R.drawable.img_desk, "Hard Desk", "$ 60.00", 56, "Ngon bá bú"),
+        Product(7,R.drawable.img_lamp, "Soft Desk", "$ 70.00", 54, "Ngon bá chó"),
+        Product(8,R.drawable.img_chair, "Office Desk", "$ 80.00", 55, "Ngon bá chém"),
     )
 
     LazyVerticalGrid(
@@ -147,19 +133,25 @@ fun ProductGrid(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(products.size) { index ->
-            ProductItem(products[index])
+            ProductItem(products[index], onClick = {
+                navController.navigate("detail/${products[index].id}")
+            })
         }
     }
 }
 
 @Composable
-fun ProductItem(product: Product) {
+fun ProductItem(product: Product, onClick: () -> Unit) {
     Column(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
-    ) {
+            .padding(8.dp)
+            .clickable {
+                onClick()
+            },
+
+        ) {
         Image(
             painter = painterResource(id = product.imageRes),
             contentDescription = product.name,
@@ -280,6 +272,7 @@ fun BottomNavigationBar(nav: NavController) {
 }
 
 data class Product(
+    val id:Int,
     val imageRes: Int,
     val name: String,
     val price: String,
