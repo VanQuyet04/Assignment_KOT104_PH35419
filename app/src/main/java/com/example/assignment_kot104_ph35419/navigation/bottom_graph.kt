@@ -54,7 +54,7 @@ fun BottomNavigationBar(nav: NavController) {
                 icon = {
                     Icon(
                         painter = painterResource(id = icon),
-                        contentDescription = name.capitalize(),
+                        contentDescription = name.replaceFirstChar { it.uppercase() },
                         modifier = Modifier.size(24.dp)
                     )
                 },
@@ -62,16 +62,15 @@ fun BottomNavigationBar(nav: NavController) {
                 onClick = {
                     selectedItem = name
                     nav.navigate(name) {
-
-                        // Xóa tất cả các trang trước trang đích để tránh chồng chất trang
+                        //Xóa tất cả các trang đich trước để tránh chồng chất trang
                         popUpTo(nav.graph.startDestinationId) {
                             saveState = true
                         }
 
-                        // Điều hướng đến một màn hình duy nhất, không tạo thêm bản sao
+// Điều hướng đến 1 màn hình duy nhất và k tạo thêm bản sao
                         launchSingleTop = true
 
-                        // khôi phục trạng thái đã lưu
+// Khôi phục trạng thái đã lưu
                         restoreState = true
                     }
                 },
