@@ -11,13 +11,8 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 
-
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -177,99 +172,7 @@ fun ProductItem(product: Product, onClick: () -> Unit) {
     }
 }
 
-@Composable
-fun BottomNavigationBar(nav: NavController) {
-    var selectedItem by remember { mutableStateOf("home") }
 
-    NavigationBar(
-        containerColor = Color.White,
-    ) {
-
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_home),
-                    contentDescription = "Home",
-                    modifier = Modifier.size(24.dp),
-                )
-            },
-            selected = selectedItem == "home",
-            onClick = {
-                selectedItem = "home"
-                nav.navigate("home")
-            },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color.Black,
-                unselectedIconColor = Color.Gray,
-                indicatorColor = Color.White
-            ),
-            alwaysShowLabel = false,
-        )
-
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_favourite),
-                    contentDescription = "Favourite",
-                    modifier = Modifier.size(24.dp)
-                )
-            },
-            selected = selectedItem == "favourite",
-            onClick = {
-                selectedItem = "favourite"
-                nav.navigate("favourite")
-            },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color.Black,
-                unselectedIconColor = Color.Gray,
-                indicatorColor = Color.White
-            ),
-            alwaysShowLabel = false,
-        )
-
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_notifications),
-                    contentDescription = "Notifications",
-                    modifier = Modifier.size(24.dp)
-                )
-            },
-            selected = selectedItem == "notification",
-            onClick = {
-                selectedItem = "notification"
-                nav.navigate("notification")
-            },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color.Black,
-                unselectedIconColor = Color.Gray,
-                indicatorColor = Color.White
-            ),
-            alwaysShowLabel = false,
-        )
-
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_profile),
-                    contentDescription = "Profile",
-                    modifier = Modifier.size(24.dp)
-                )
-            },
-            selected = selectedItem == "profile",
-            onClick = {
-                selectedItem = "profile"
-                nav.navigate("profile")
-            },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color.Black,
-                unselectedIconColor = Color.Gray,
-                indicatorColor = Color.White
-            ),
-            alwaysShowLabel = false,
-        )
-    }
-}
 
 data class Product(
     val id:Int,
