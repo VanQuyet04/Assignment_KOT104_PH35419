@@ -1,3 +1,3 @@
-Link video demo 4 màn hình 
+Link video demo 
 
 https://youtu.be/pcaFCcXLFLE
