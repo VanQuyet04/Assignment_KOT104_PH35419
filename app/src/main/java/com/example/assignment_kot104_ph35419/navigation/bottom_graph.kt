@@ -1,6 +1,7 @@
 package com.example.assignment_kot104_ph35419.navigation
 
 import CartScreen
+import ProductDetailScreen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -41,6 +42,13 @@ fun bottom_graph(navController: NavHostController) {
         composable("notification") { NotificationScreen(navController) }
         composable("favourite") { FavouriteScreen(navController) }
         composable("profile") { ProfileScreen(navController) }
+        composable("cart") { CartScreen(navController) }
+        composable("detail/{productId}") { backStackEntry ->
+            val productId = backStackEntry.arguments?.getString("productId")
+            productId?.let {
+                ProductDetailScreen(navController = navController, productId = it)
+            }
+        }
 
     }
 }

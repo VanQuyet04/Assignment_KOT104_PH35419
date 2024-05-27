@@ -79,34 +79,47 @@ fun CartScreen(navController: NavHostController) {
                         onRightClick = { }
                     ) {}
 
-                    LazyColumn {
-                        items(items.size) { index ->
-                            val item = items[index]
-                            CartItemCard(item, onRemove = { items.remove(item) })
-                            Spacer(modifier = Modifier.height(10.dp))
-                        }
-                    }
-
-                    // Khoảng trống giữa danh sách và cột giá + nút
-                    Spacer(modifier = Modifier.height(60.dp))
-
-                    // Cột giá và nút checkout
-                    Column(
-                        modifier = Modifier.fillMaxWidth()
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .weight(1f)
                     ) {
-                        Text(
-                            text = "Total: $${"%.2f".format(total)}",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(bottom = 8.dp)
-                        )
-                        Button(
-                            onClick = { },
-                            modifier = Modifier.fillMaxWidth(),
-                            shape = MaterialTheme.shapes.medium,
-                            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black, contentColor = Color.White) // Điều chỉnh màu chữ ở đây
+                        LazyColumn(
+                            modifier = Modifier.fillMaxSize()
                         ) {
-                            Text("Check out")
+                            items(items.size) { index ->
+                                val item = items[index]
+                                CartItemCard(item, onRemove = { items.remove(item) })
+                                Spacer(modifier = Modifier.height(10.dp))
+                            }
+                        }
+
+                        // Cột giá và nút checkout
+                        Column(
+                            modifier = Modifier
+                                .align(Alignment.BottomCenter)
+                                .background(Color.White)
+                                .padding(bottom = 60.dp)
+                        ) {
+                            Text(
+                                text = "Total: $${"%.2f".format(total)}",
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.padding(bottom = 8.dp)
+                            )
+                            Button(
+                                onClick = { },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 5.dp),
+                                shape = MaterialTheme.shapes.medium,
+                                colors = ButtonDefaults.buttonColors(
+                                    backgroundColor = Color.Black,
+                                    contentColor = Color.White
+                                )
+                            ) {
+                                Text("Check out")
+                            }
                         }
                     }
                 }
@@ -157,7 +170,7 @@ fun CartItemCard(item: CartItem, onRemove: () -> Unit) {
                             }
                             Text("$quantity", fontSize = 18.sp)
                             IconButton(onClick = { quantity++ }) {
-                                Icon(Icons.Default.Add, contentDescription  = "Increase quantity")
+                                Icon(Icons.Default.Add, contentDescription = "Increase quantity")
                             }
                         }
                     }
@@ -167,10 +180,6 @@ fun CartItemCard(item: CartItem, onRemove: () -> Unit) {
                 }
             }
             Spacer(modifier = Modifier.height(8.dp))
-
         }
     }
 }
-
-
-

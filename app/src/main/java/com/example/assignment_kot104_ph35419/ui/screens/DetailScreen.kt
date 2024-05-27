@@ -18,10 +18,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.assignment_kot104_ph35419.R
 
 @Composable
-fun ProductDetailScreen(navController: NavController, productId: String) {
+fun ProductDetailScreen(navController: NavHostController, productId: String) {
     val scrollState = rememberScrollState()
     val quantity = remember { mutableStateOf(1) }
 
@@ -163,21 +164,21 @@ fun ProductDetailScreen(navController: NavController, productId: String) {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.White)
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(16.dp).align(Alignment.BottomCenter),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
 
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Color.White)
-                    .padding(16.dp),
+                    .padding(vertical = 16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(
                     onClick = { },
-                    modifier = Modifier.weight(1f).height(60.dp)
+                    modifier = Modifier.weight(1f).height(45.dp)
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_favourite),
@@ -190,7 +191,7 @@ fun ProductDetailScreen(navController: NavController, productId: String) {
                     onClick = { },
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
                     shape = MaterialTheme.shapes.medium,
-                    modifier = Modifier.weight(2f).height(60.dp)
+                    modifier = Modifier.weight(3f).height(45.dp)
 
                 ) {
                     Text(text = "Add to cart", color = Color.White)
