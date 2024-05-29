@@ -12,10 +12,10 @@ import com.example.assignment_kot104_ph35419.navigation.bottom_graph
 fun Home() {
 
     val bottomnavController = rememberNavController()
-
     Scaffold(
         bottomBar = { BottomNavigationBar(bottomnavController) }
     ) {
         bottom_graph(bottomnavController)
     }
+
 }

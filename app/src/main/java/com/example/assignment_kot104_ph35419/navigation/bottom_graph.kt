@@ -34,33 +34,35 @@ import com.example.assignment_kot104_ph35419.ui.screens.HomeScreen
 import com.example.assignment_kot104_ph35419.ui.screens.NotificationScreen
 import com.example.assignment_kot104_ph35419.ui.screens.ProfileScreen
 
+enum class ROUTE_BOTTOM_SCREEN {
+    Home,
+    Favorite,
+    Notification,
+    Profile
+}
+
 @Composable
 fun bottom_graph(navController: NavHostController) {
 
-    NavHost(navController = navController, startDestination = "home") {
-        composable("home") { HomeScreen(navController) }
-        composable("notification") { NotificationScreen(navController) }
-        composable("favourite") { FavouriteScreen(navController) }
-        composable("profile") { ProfileScreen(navController) }
-        composable("cart") { CartScreen(navController) }
-        composable("detail/{productId}") { backStackEntry ->
-            val productId = backStackEntry.arguments?.getString("productId")
-            productId?.let {
-                ProductDetailScreen(navController = navController, productId = it)
-            }
-        }
+    NavHost(navController = navController, startDestination = ROUTE_BOTTOM_SCREEN.Home.name) {
+        composable(ROUTE_BOTTOM_SCREEN.Home.name) { HomeScreen(navController) }
+        composable(ROUTE_BOTTOM_SCREEN.Favorite.name) { FavouriteScreen(navController) }
+        composable(ROUTE_BOTTOM_SCREEN.Notification.name) { NotificationScreen(navController) }
+        composable(ROUTE_BOTTOM_SCREEN.Profile.name) { ProfileScreen(navController) }
 
     }
+
 }
 
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
+
     val items = listOf(
-        "home" to R.drawable.ic_home,
-        "favourite" to R.drawable.ic_favourite,
-        "notification" to R.drawable.ic_notifications,
-        "profile" to R.drawable.ic_profile
+        ROUTE_BOTTOM_SCREEN.Home to R.drawable.ic_home,
+        ROUTE_BOTTOM_SCREEN.Favorite to R.drawable.ic_favourite,
+        ROUTE_BOTTOM_SCREEN.Notification to R.drawable.ic_notifications,
+        ROUTE_BOTTOM_SCREEN.Profile to R.drawable.ic_profile
     )
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -73,25 +75,26 @@ fun BottomNavigationBar(navController: NavController) {
             .background(
                 color = Color.White,
                 shape = RoundedCornerShape(35.dp) // Điều chỉnh giá trị này để bo góc
-            ) .border(
+            )
+            .border(
                 width = 1.dp,
                 color = Color.LightGray,
                 shape = RoundedCornerShape(20.dp)
             )
     ) {
         NavigationBar(containerColor = Color.White) {
-            items.forEach { (name, icon) ->
+            items.forEach { (route, icon) ->
                 NavigationBarItem(
                     icon = {
                         Icon(
                             painter = painterResource(id = icon),
-                            contentDescription = name.replaceFirstChar { it.uppercase() },
+                            contentDescription = route.name.replaceFirstChar { it.uppercase() },
                             modifier = Modifier.size(24.dp)
                         )
                     },
-                    selected = currentRoute == name,
+                    selected = currentRoute == route.name,
                     onClick = {
-                        navController.navigate(name) {
+                        navController.navigate(route.name) {
                             // Xóa tất cả các trang đích trước để tránh chồng chất trang
                             popUpTo(navController.graph.startDestinationId) {
                                 saveState = true

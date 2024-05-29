@@ -21,8 +21,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.assignment_kot104_ph35419.R
+import com.example.assignment_kot104_ph35419.navigation.ROUTE_MAIN_SCREEN
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -46,7 +49,7 @@ fun HomeScreen(nav: NavHostController) {
                 rightIconId = R.drawable.cart,
                 onLeftClick = { },
                 onRightClick = {
-                    nav.navigate("cart")
+                    nav.navigate(ROUTE_MAIN_SCREEN.cart.name)
                 }
             ) {}
             Spacer(modifier = Modifier.height(16.dp))
@@ -100,18 +103,18 @@ fun CategoryItem(iconRes: Int, label: String) {
 
 @Composable
 fun ProductGrid(
-    navController: NavHostController
+    navController: NavController
 
 ) {
     val products = listOf(
-        Product(1,R.drawable.img_lamp, "Black Simple Lamp", "$ 12.00", 50, "Ngon bá cháy"),
-        Product(2,R.drawable.img_stand, "Minimal Stand", "$ 25.00", 53, "Ngon bá khét"),
-        Product(3,R.drawable.img_chair, "Coffee Chair", "$ 20.00", 55, "Ngon bá bá"),
-        Product(4,R.drawable.img_desk, "Simple Desk", "$ 50.00", 52, "Ngon bá khí"),
-        Product(5,R.drawable.img_stand, "Normal Desk", "$ 40.00", 59, "Ngon bá đạo"),
-        Product(6,R.drawable.img_desk, "Hard Desk", "$ 60.00", 56, "Ngon bá bú"),
-        Product(7,R.drawable.img_lamp, "Soft Desk", "$ 70.00", 54, "Ngon bá chó"),
-        Product(8,R.drawable.img_chair, "Office Desk", "$ 80.00", 55, "Ngon bá chém"),
+        Product(1, R.drawable.img_lamp, "Black Simple Lamp", "$ 12.00", 50, "Ngon bá cháy"),
+        Product(2, R.drawable.img_stand, "Minimal Stand", "$ 25.00", 53, "Ngon bá khét"),
+        Product(3, R.drawable.img_chair, "Coffee Chair", "$ 20.00", 55, "Ngon bá bá"),
+        Product(4, R.drawable.img_desk, "Simple Desk", "$ 50.00", 52, "Ngon bá khí"),
+        Product(5, R.drawable.img_stand, "Normal Desk", "$ 40.00", 59, "Ngon bá đạo"),
+        Product(6, R.drawable.img_desk, "Hard Desk", "$ 60.00", 56, "Ngon bá bú"),
+        Product(7, R.drawable.img_lamp, "Soft Desk", "$ 70.00", 54, "Ngon bá chó"),
+        Product(8, R.drawable.img_chair, "Office Desk", "$ 80.00", 55, "Ngon bá chém"),
     )
 
     LazyVerticalGrid(
@@ -124,9 +127,7 @@ fun ProductGrid(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(products.size) { index ->
-            ProductItem(products[index], onClick = {
-                navController.navigate("detail/${products[index].id}")
-            })
+            ProductItem(products[index], onClick = {})
         }
     }
 }
@@ -168,10 +169,8 @@ fun ProductItem(product: Product, onClick: () -> Unit) {
     }
 }
 
-
-
 data class Product(
-    val id:Int,
+    val id: Int,
     val imageRes: Int,
     val name: String,
     val price: String,
