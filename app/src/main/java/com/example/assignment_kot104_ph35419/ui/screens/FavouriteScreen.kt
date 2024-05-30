@@ -1,6 +1,5 @@
 package com.example.assignment_kot104_ph35419.ui.screens
 
-import CustomTopBar
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

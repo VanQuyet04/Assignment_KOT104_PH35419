@@ -1,7 +1,6 @@
 package com.example.assignment_kot104_ph35419.navigation
 
 import CartScreen
-import ProductDetailScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost

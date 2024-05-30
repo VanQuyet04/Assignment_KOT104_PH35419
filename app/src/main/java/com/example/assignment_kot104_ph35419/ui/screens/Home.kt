@@ -8,11 +8,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.assignment_kot104_ph35419.R
 import com.example.assignment_kot104_ph35419.navigation.BottomNavigationBar
 import com.example.assignment_kot104_ph35419.navigation.ROUTE_MAIN_SCREEN
 import com.example.assignment_kot104_ph35419.navigation.bottom_graph

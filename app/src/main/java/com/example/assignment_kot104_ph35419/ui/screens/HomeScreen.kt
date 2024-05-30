@@ -1,6 +1,5 @@
 package com.example.assignment_kot104_ph35419.ui.screens
 
-import CustomTopBar
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,7 +25,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.assignment_kot104_ph35419.R
-import com.example.assignment_kot104_ph35419.navigation.ROUTE_MAIN_SCREEN
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
