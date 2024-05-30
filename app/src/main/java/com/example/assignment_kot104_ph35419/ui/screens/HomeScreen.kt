@@ -6,8 +6,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -42,16 +44,6 @@ fun HomeScreen(nav: NavHostController) {
                 .background(Color.White)
                 .padding(16.dp)
         ) {
-            CustomTopBar(
-                title = "Make home",
-                subtitle = "Beautiful",
-                leftIconId = R.drawable.timkiem,
-                rightIconId = R.drawable.cart,
-                onLeftClick = { },
-                onRightClick = {
-                    nav.navigate(ROUTE_MAIN_SCREEN.cart.name)
-                }
-            ) {}
             Spacer(modifier = Modifier.height(16.dp))
             CategoryRow()
             Spacer(modifier = Modifier.height(16.dp))
@@ -60,28 +52,36 @@ fun HomeScreen(nav: NavHostController) {
     }
 }
 
-
 @Composable
 fun CategoryRow() {
-    Row(
+    LazyRow(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        CategoryItem(R.drawable.ic_popular, "Popular")
-        CategoryItem(R.drawable.ic_table, "Table")
-        CategoryItem(R.drawable.ic_armchair, "Armchair")
-        CategoryItem(R.drawable.ic_bed, "Bed")
-        CategoryItem(R.drawable.ic_lamp, "Lamp")
+        items(
+            listOf(
+                CategoryItemData(R.drawable.ic_popular, "Popular"),
+                CategoryItemData(R.drawable.ic_table, "Table"),
+                CategoryItemData(R.drawable.ic_armchair, "Armchair"),
+                CategoryItemData(R.drawable.ic_bed, "Bed"),
+                CategoryItemData(R.drawable.ic_lamp, "Lamp"),
+                CategoryItemData(R.drawable.ic_lamp, "Lamp"),
+                CategoryItemData(R.drawable.ic_lamp, "Lamp"),
+            )
+        ) { item ->
+            CategoryItem(item.iconRes, item.label)
+        }
     }
 }
+
 
 @Composable
 fun CategoryItem(iconRes: Int, label: String) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
-        modifier = Modifier.padding(4.dp)
+        modifier = Modifier.padding(vertical = 4.dp, horizontal = 10.dp)
     ) {
         Icon(
             painter = painterResource(id = iconRes),
@@ -101,10 +101,10 @@ fun CategoryItem(iconRes: Int, label: String) {
     }
 }
 
+
 @Composable
 fun ProductGrid(
     navController: NavController
-
 ) {
     val products = listOf(
         Product(1, R.drawable.img_lamp, "Black Simple Lamp", "$ 12.00", 50, "Ngon bá cháy"),
@@ -120,8 +120,7 @@ fun ProductGrid(
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier
-            .fillMaxSize()
-            .padding(0.dp, 0.dp, 0.dp, 60.dp),
+            .fillMaxSize(),
         contentPadding = PaddingValues(8.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
@@ -169,6 +168,7 @@ fun ProductItem(product: Product, onClick: () -> Unit) {
     }
 }
 
+
 data class Product(
     val id: Int,
     val imageRes: Int,
@@ -177,3 +177,4 @@ data class Product(
     val quantity: Int,
     val description: String
 )
+data class CategoryItemData(val iconRes: Int, val label: String)

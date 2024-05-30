@@ -55,20 +55,13 @@ fun FavouriteScreen(navController: NavHostController) {
                     .fillMaxSize()
                     .padding(16.dp)
             ) {
-                CustomTopBar(
-                    title = "My favourite",
-                    subtitle = null,
-                    leftIconId = R.drawable.back,
-                    rightIconId = R.drawable.cart,
-                    onLeftClick = { navController.popBackStack() },
-                    onRightClick = { navController.navigate("cart") }
-                ) {}
+
                 Spacer(modifier = Modifier.height(16.dp))
                 Column(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
+                        .padding(horizontal = 8.dp)
                 ) {
                     ProductList(productList)
                     Spacer(modifier = Modifier.height(10.dp)) // Spacer giữa danh sách và nút
@@ -123,7 +116,7 @@ fun ProductItem(product: Product, onAddToCart: () -> Unit, onRemove: () -> Unit)
                 contentDescription = product.name,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(64.dp)
+                    .size(80.dp)
                     .clip(RoundedCornerShape(8.dp))
             )
             Spacer(modifier = Modifier.width(16.dp))
@@ -150,7 +143,7 @@ fun AddAllToCartButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
         onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 10.dp, bottom = 60.dp),
+            .padding(16.dp),
         shape = MaterialTheme.shapes.medium,
         colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
     ) {

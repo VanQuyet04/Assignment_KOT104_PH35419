@@ -31,7 +31,7 @@ fun main_graph(navController: NavHostController) {
         composable(ROUTE_MAIN_SCREEN.signup.name) { SignupScreen(navController) }
         composable(ROUTE_MAIN_SCREEN.cart.name) { CartScreen(navController) }
 
-        composable(ROUTE_MAIN_SCREEN.main.name) { Home() }
+        composable(ROUTE_MAIN_SCREEN.main.name) { Home(navController) }
 
 
 

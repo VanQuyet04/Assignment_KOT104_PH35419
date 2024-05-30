@@ -68,22 +68,16 @@ val notifications = listOf(
 fun NotificationScreen(navController: NavHostController) {
 
     Scaffold(
+
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White),
         content = {
             Column(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
                     .padding(16.dp)
             ) {
-                CustomTopBar(
-                    title = "Notification",
-                    subtitle = null,
-                    leftIconId = R.drawable.timkiem,
-                    rightIconId = null,
-                    onLeftClick = { },
-                    onRightClick = { }) {}
-
                 LazyColumn(
                     modifier = Modifier.fillMaxSize()
                 ) {

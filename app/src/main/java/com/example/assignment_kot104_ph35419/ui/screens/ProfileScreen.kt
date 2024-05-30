@@ -44,14 +44,7 @@ fun ProfileScreen(navController: NavHostController) {
                         .fillMaxSize()
                         .padding(16.dp)
                 ) {
-                    CustomTopBar(
-                        title = "Profile",
-                        subtitle = null,
-                        leftIconId = R.drawable.timkiem,
-                        rightIconId = R.drawable.logout,
-                        onLeftClick = { /* TODO: Handle left icon click */ },
-                        onRightClick = { exitProcess(0) }
-                    ){}
+
                     Spacer(modifier = Modifier.height(16.dp))
                     ProfileHeader()
                     Spacer(modifier = Modifier.height(40.dp))

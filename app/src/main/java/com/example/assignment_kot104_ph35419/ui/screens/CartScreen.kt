@@ -23,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.assignment_kot104_ph35419.R
@@ -46,7 +47,7 @@ class CartActivity : ComponentActivity() {
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun CartScreen(navController: NavHostController) {
+fun CartScreen(navController: NavController) {
     val items = remember {
         mutableStateListOf(
             CartItem(R.drawable.minimal_stand, "Minimal Stand", 25.0, 1),
@@ -57,6 +58,17 @@ fun CartScreen(navController: NavHostController) {
     val total = items.sumOf { it.price * it.quantity }
 
     Scaffold(
+        topBar = {
+            CustomTopBar(
+                title = "My cart",
+                subtitle = null,
+                leftIconId = R.drawable.back,
+                rightIconId = null,
+                onLeftClick = { navController.popBackStack() },
+                onRightClick = { }
+            )
+
+        },
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White),
@@ -70,14 +82,6 @@ fun CartScreen(navController: NavHostController) {
                         .fillMaxSize()
                         .padding(16.dp)
                 ) {
-                    CustomTopBar(
-                        title = "My cart",
-                        subtitle = null,
-                        leftIconId = R.drawable.back,
-                        rightIconId = null,
-                        onLeftClick = { navController.popBackStack() },
-                        onRightClick = { }
-                    ) {}
 
                     Box(
                         modifier = Modifier
@@ -99,7 +103,6 @@ fun CartScreen(navController: NavHostController) {
                             modifier = Modifier
                                 .align(Alignment.BottomCenter)
                                 .background(Color.White)
-                                .padding(bottom = 60.dp)
                         ) {
                             Text(
                                 text = "Total: $${"%.2f".format(total)}",
@@ -111,14 +114,14 @@ fun CartScreen(navController: NavHostController) {
                                 onClick = { },
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(vertical = 5.dp),
+                                    .padding(10.dp),
                                 shape = MaterialTheme.shapes.medium,
                                 colors = ButtonDefaults.buttonColors(
                                     backgroundColor = Color.Black,
                                     contentColor = Color.White
                                 )
                             ) {
-                                Text("Check out")
+                                Text("Check out",modifier = Modifier.padding(8.dp))
                             }
                         }
                     }

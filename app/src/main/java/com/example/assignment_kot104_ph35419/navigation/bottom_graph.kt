@@ -44,7 +44,7 @@ enum class ROUTE_BOTTOM_SCREEN {
 @Composable
 fun bottom_graph(navController: NavHostController) {
 
-    NavHost(navController = navController, startDestination = ROUTE_BOTTOM_SCREEN.Home.name) {
+    NavHost( navController, startDestination = ROUTE_BOTTOM_SCREEN.Home.name) {
         composable(ROUTE_BOTTOM_SCREEN.Home.name) { HomeScreen(navController) }
         composable(ROUTE_BOTTOM_SCREEN.Favorite.name) { FavouriteScreen(navController) }
         composable(ROUTE_BOTTOM_SCREEN.Notification.name) { NotificationScreen(navController) }
